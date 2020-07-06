@@ -1,14 +1,6 @@
-#include <catch2/catch.hpp>
+#include "gtest/gtest.h"
 
-unsigned int Factorial(unsigned int number)
+TEST(sample_test_case, sample_test)
 {
-  return number <= 1 ? number : Factorial(number - 1) * number;
-}
-
-TEST_CASE("Factorials are computed", "[factorial]")
-{
-  REQUIRE(Factorial(1) == 1);
-  REQUIRE(Factorial(2) == 2);
-  REQUIRE(Factorial(3) == 6);
-  REQUIRE(Factorial(10) == 3628800);
+    EXPECT_EQ(1, 1);
 }

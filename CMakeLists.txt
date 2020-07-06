@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
 
-# Set the project name to your project name, my project isn't very descriptive
-project(myproject CXX)
+project(bravo6 CXX)
 include(cmake/StandardProjectSettings.cmake)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_17)
+target_compile_features(project_options INTERFACE cxx_std_20)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
   option(ENABLE_BUILD_WITH_TIME_TRACE "Enable -ftime-trace to generate time tracing .json files on clang" OFF)
@@ -56,30 +55,29 @@ endif()
 set(CONAN_EXTRA_REQUIRES "")
 set(CONAN_EXTRA_OPTIONS "")
 
-if(CPP_STARTER_USE_IMGUI)
-  set(CONAN_EXTRA_REQUIRES ${CONAN_EXTRA_REQUIRES}
-                           imgui-sfml/2.1@bincrafters/stable)
-
-  # set(CONAN_EXTRA_OPTIONS ${CONAN_EXTRA_OPTIONS} sfml:shared=False
-  # sfml:graphics=True sfml:audio=False sfml:window=True
-  # libalsa:disable_python=True)
-endif()
-
-if(CPP_STARTER_USE_SDL)
-  set(CONAN_EXTRA_REQUIRES ${CONAN_EXTRA_REQUIRES}
-                           sdl2/2.0.10@bincrafters/stable)
-  # set(CONAN_EXTRA_OPTIONS ${CONAN_EXTRA_OPTIONS} sdl2:wayland=True)
-endif()
-
+set(CONAN_EXTRA_REQUIRES ${CONAN_EXTRA_REQUIRES}
+                          soil2/1.11@bincrafters/stable
+                          imgui/1.76
+                          glm/0.9.9.8
+                          glfw/3.3.2@bincrafters/stable
+                          glew/2.1.0@bincrafters/stable
+                          assimp/5.0.1)
 
 include(cmake/Conan.cmake)
 run_conan()
 
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    set(BRAVO6_IS_DEBUG true)
+else()
+    set(BRAVO6_IS_DEBUG false)
+endif()
+
+configure_file(templates/bravo6_config.hpp.in ${CMAKE_BINARY_DIR}/config/bravo6_config.hpp)
+
 if(ENABLE_TESTING)
+  include(CTest)
   enable_testing()
-  message(
-    "Building Tests. Be sure to check out test/constexpr_tests for constexpr testing"
-  )
+  message("Testing is enabled, tests will build")
   add_subdirectory(test)
 endif()
 
@@ -91,13 +89,9 @@ if(ENABLE_FUZZING)
 endif()
 
 
-add_subdirectory(src)
-
-
-option(ENABLE_UNITY "Enable Unity builds of projects" OFF)
-if (ENABLE_UNITY)
-  # Add for any project you want to apply unity builds for
-  set_target_properties(intro PROPERTIES UNITY_BUILD ON)
+add_subdirectory(bravo6)
+if(IS_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/experiments")
+  add_subdirectory(experiments)
 endif()
 
 

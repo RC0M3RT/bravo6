@@ -3,8 +3,8 @@ macro(run_conan)
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
   message(
     STATUS
-      "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-  file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.15/conan.cmake"
+      "Downloading conan.cmake from https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake")
+  file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
        "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 
@@ -16,14 +16,16 @@ conan_add_remote(NAME bincrafters URL
 conan_cmake_run(
   REQUIRES
   ${CONAN_EXTRA_REQUIRES}
-  catch2/2.11.0
+  gtest/1.10.0
+  benchmark/1.5.0
   docopt.cpp/0.6.2
-  fmt/6.1.2
-  spdlog/1.5.0
+  fmt/6.2.1
+  spdlog/1.6.1
   OPTIONS
   ${CONAN_EXTRA_OPTIONS}
   BASIC_SETUP
   CMAKE_TARGETS # individual targets to link to
+  SETTINGS benchmark:build_type=Release
   BUILD
   missing)
 endmacro()

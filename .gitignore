@@ -1,0 +1,8 @@
+build/
+.vscode/
+logs/
+*.code-workspace
+*.ini
+CMakeSettings.json
+.vs/
+CMakeLists.txt.user

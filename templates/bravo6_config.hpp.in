@@ -1,0 +1,10 @@
+#pragma once
+
+namespace bravo6{
+namespace config{
+
+constexpr static auto resources_directory = "${CMAKE_SOURCE_DIR}/resources";
+constexpr static auto is_debug_build = ${BRAVO6_IS_DEBUG};
+
+} // namespace config
+} // namespace bravo6
