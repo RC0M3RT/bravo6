@@ -16,15 +16,6 @@ engine::engine()
     , render_system_{ new bravo6::render_system() }
     , ctor_helper_{ new bravo6::constructor_helper() }
 {
-
-}
-
-engine::engine(ctx_t&& ctx)
-    : context_{ new ctx_t(std::move(ctx)) }
-    , ec_manager_{ new bravo6::ec_manager() }
-    , render_system_{ new bravo6::render_system() }
-    , ctor_helper_{ new bravo6::constructor_helper() }
-{
 }
 
 engine::~engine()

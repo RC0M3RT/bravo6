@@ -133,7 +133,6 @@ public:
     static component_signature_storage_t build_signature(){
         component_signature_storage_t sig_{false};
         (set_signature<Ts>(sig_) , ... );
-        // sig_.set(ECT::template component_index<Ts>()... );
 
         return sig_;
     }

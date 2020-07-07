@@ -44,10 +44,11 @@ void render_system::render(bravo6::ec_manager* ecm, bravo6::context* ctx)
 		glDrawElements(GL_TRIANGLES, d.index_count_, GL_UNSIGNED_INT, 0);
 	});
 
-	glfwPollEvents();
 	ctx->visit_window([&](GLFWwindow* w) {
 		glfwSwapBuffers(w);
 	});
+
+	glfwPollEvents();
 }
 
 } // namespace bravo6

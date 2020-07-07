@@ -26,13 +26,6 @@ public:
     */
     engine();
 
-    /**
-     * @brief Construct a new engine object
-     * 
-     * @param ctx 
-     */
-    engine(ctx_t&& ctx);
-
     ~engine();
 
     /**

@@ -22,8 +22,6 @@ public:
      */
     context();
 
-    context(context&& other) noexcept;
-
     bravo6::window* get_window() const;
 
     bool active() const;
@@ -43,6 +41,9 @@ public:
             B6_WARN("Cannot visit window with the given callable");
         }
     }
+private:
+
+    void setup_input_callbacks();
 
 private:
     std::unique_ptr<bravo6::window> window_{nullptr};
