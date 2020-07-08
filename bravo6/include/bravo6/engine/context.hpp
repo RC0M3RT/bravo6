@@ -9,6 +9,8 @@ struct GLFWwindow;
 
 namespace bravo6 {
 
+class input_manager;
+
 /**
  * @brief 
  * 
@@ -21,6 +23,8 @@ public:
      * 
      */
     context();
+
+    ~context();
 
     bravo6::window* get_window() const;
 
@@ -47,6 +51,7 @@ private:
 
 private:
     std::unique_ptr<bravo6::window> window_{nullptr};
+    std::unique_ptr<bravo6::input_manager> input_manager_{ nullptr };
 };
 
 

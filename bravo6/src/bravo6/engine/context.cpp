@@ -8,10 +8,15 @@ namespace bravo6 {
 
 context::context()
     : window_{ std::make_unique<bravo6::window>() }
+    , input_manager_{ std::make_unique<bravo6::input_manager>() }
 {
     if (window_->init()) {
         setup_input_callbacks();
     }
+}
+
+context::~context()
+{
 }
 
 bravo6::window* context::get_window() const
@@ -26,6 +31,7 @@ bool context::active() const
 
 void context::setup_input_callbacks()
 {
+    glfwSetWindowUserPointer(window_->gl_window_, reinterpret_cast<void*>(input_manager_.get()));
     glfwSetKeyCallback(window_->gl_window_, input_manager::key_callback);
 }
 

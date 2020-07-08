@@ -38,7 +38,17 @@ add_library(bravo6
          
          
         "include/bravo6/core/components/c_texture.hpp" 
-        "include/bravo6/core/resource_helper.hpp" "include/bravo6/core/components/c_model_view_projection.hpp" "include/bravo6/systems/system_base.hpp"  "include/bravo6/core/components/c_drawable_indexed.hpp" "include/bravo6/core/constructor_helper.hpp" "src/bravo6/core/constructor_helper.cpp" "include/bravo6/core/texture_helper.hpp" "src/bravo6/core/texture_helper.cpp" "include/bravo6/engine/input_manager.hpp" "src/bravo6/engine/input_manager.cpp")
+        "include/bravo6/core/resource_helper.hpp" 
+        "include/bravo6/core/components/c_model_view_projection.hpp" 
+        "include/bravo6/systems/system_base.hpp"  
+        "include/bravo6/core/components/c_drawable_indexed.hpp" 
+        "include/bravo6/core/constructor_helper.hpp" 
+        "src/bravo6/core/constructor_helper.cpp" 
+        "include/bravo6/core/texture_helper.hpp" 
+        "src/bravo6/core/texture_helper.cpp" 
+        "include/bravo6/engine/input_manager.hpp" 
+        "src/bravo6/engine/input_manager.cpp" 
+        "include/bravo6/types/observer_ptr.hpp")
 
 target_include_directories(bravo6 PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include" "${CMAKE_BINARY_DIR}/config/")
 

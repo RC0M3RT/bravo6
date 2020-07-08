@@ -29,6 +29,8 @@
 #include <bravo6/core/components/c_model_view_projection.hpp>
 #include <yaecs.hpp>
 
+#include <bravo6/types/observer_ptr.hpp>
+
 #if GLM_VERSION == 998
 #pragma warning(push)
 #pragma warning(disable: 4201)  // nonstandard extension used : nameless struct/union
@@ -45,7 +47,18 @@ void framebuffer_size_callback(GLFWwindow*, int width, int height)
 
 int main(int, char**)
 {
-    B6_INFO("App started")
+    B6_INFO("App started");
+
+    struct MyStruct
+    {
+        void foo() { B6_INFO("foo");  };
+    };
+
+    auto* ms_ = new MyStruct();
+
+    bravo6::observer_ptr<MyStruct> pt_{ms_};
+
+    pt_->foo();
 
     auto engine_ = bravo6::engine();
 
